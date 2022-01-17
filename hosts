@@ -1,0 +1,8 @@
+Luzon       ansible_host=192.168.30.1
+Visayas     ansible_host=10.0.0.2
+Mindanao    ansible_host=10.0.0.6
+
+[routers]
+Luzon
+Visayas
+Mindanao

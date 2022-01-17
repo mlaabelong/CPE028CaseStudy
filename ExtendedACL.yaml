@@ -1,0 +1,25 @@
+---
+  - name: Configure Extended ACL
+    hosts: Luzon
+    gather_facts: false
+    connection: local
+    vars:
+      cli:
+        username: cisco
+        password: cisco123!
+
+    tasks:
+      - name: Allow only PC1 network
+        ios_config:
+          provider: "{{ cli }}"
+          lines:
+            - 10 deny icmp host 192.168.40.3 any
+            - 20 permit ip any any
+          parents: ip access-list extended ACL-PC1
+
+      - name: Apply in F0/0
+        ios_config:
+          provider: "{{ cli }}"
+          parents: interface f0/0
+          lines:
+            - ip access-group ACL-PC1 out
